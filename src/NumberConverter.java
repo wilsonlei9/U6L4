@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class NumberConverter {
     int[] digits;
     int base;
@@ -26,7 +28,7 @@ public class NumberConverter {
         return digits;
     }
 
-    public int convertToDecimal() {
+    public int[] convertToDecimal() {
         int d = 0;
         if (base == 2) {
             for (int i = 0; i < digits.length; i++) {
@@ -38,10 +40,25 @@ public class NumberConverter {
                 d += digits[i] * Math.pow(8, digits.length - (i+1));
             }
         }
-        return d;
+        if (base == 16) {
+            String numbers = "0123456789ABCDEF";
+            for (int i = 0; i < digits.length; i++) {
+                char c = numbers.charAt(i);
+                int n = numbers.indexOf(c);
+                d = 16 * d + n;
+            }
+
+        }
+        String str = d + "";
+        int[] decimal = new int[str.length()];
+        for (int i = 0; i < decimal.length; i++)
+        {
+            decimal[i] = Integer.parseInt(str.substring(i, i+1));
+        }
+        return decimal;
     }
 
-    public int convertToBinary() {
+    public int[] convertToBinary() {
         int number = 0;
         String n = "";
         int binary = 0;
@@ -88,10 +105,17 @@ public class NumberConverter {
             }
             binary = Integer.parseInt(b);
         }
-        return binary;
+        String str = binary + "";
+        int[] binaryArray = new int[str.length()];
+        for (int i = 0; i < binaryArray.length; i++)
+        {
+            binaryArray[i] = Integer.parseInt(str.substring(i, i+1));
+        }
+
+        return binaryArray;
     }
 
-    public int convertToOctal() {
+    public int[] convertToOctal() {
         int d = 0;
         int number = 0;
         String n = "";
@@ -138,7 +162,13 @@ public class NumberConverter {
             }
             octal = Integer.parseInt(b);
         }
-        return octal;
+        String str = octal + "";
+        int[] octalArray = new int[str.length()];
+        for (int i = 0; i < octalArray.length; i++)
+        {
+            octalArray[i] = Integer.parseInt(str.substring(i, i+1));
+        }
+        return octalArray;
     }
 }
 
